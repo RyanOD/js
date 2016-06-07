@@ -1,34 +1,43 @@
 // merge sort
 
-function compare(start, position)
+function merge(arrLeft, arrRight)
 {
-	return(list[start] > list[position]);
-}
-
-function swap(p1, p2)
-{
-	var temp = list[p1];
-	list[p1] = list[p2];
-	list[p2] = temp;
-}
-
-function sort()
-{
-	for(var i = 0; i < list.length; i++)
+	var tempArray = [];
+	while(arrLeft.length > 0 && arrRight.length > 0)
 	{
+		if(arrLeft[0] > arrRight[0])
+		{
+			tempArray.push(arrRight[0]);
+			arrRight.shift();
+		}
+		else
+		{
+			tempArray.push(arrLeft[0]);
+			arrLeft.shift();
+		}
+	}
+	
+	tempArray = arrLeft.length > 0 ? tempArray.concat(arrLeft) : tempArray.concat(arrRight);
+	return tempArray;
+}
 
+function mergeSort(arr)
+{
+	if(arr.length === 0)
+	{
+		return 'Empty array';
+	}
+	
+	if(arr.length < 2)
+	{
+		return arr;
 	}
 
+	var midpoint = Math.floor(arr.length / 2);
+	var arrLeft = mergeSort(arr.slice(0, midpoint));
+	var arrRight = mergeSort(arr.slice(midpoint));
 
+	return merge(arrLeft, arrRight);
 }
 
-6,5,3,1,8,7,2,4
-
-6  5  3  1  8  7  2  4
-
-pass list 1 & 2 into compare
-compare first positions in list 1 & 2 (6 w/ 5)
-swap 6 & 5 and merge into single list
-
-compare first positions in list 3 & 4
-
+console.log(mergeSort([3,2,5,23,32,11,5,8,3,5,1,22]));
