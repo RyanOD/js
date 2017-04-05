@@ -26,12 +26,6 @@ function randomizeList(list)
 	return randomList;
 }
 
-function mergeSort(list)
-{
-
-
-}
-
 function binarySearch(list, num)
 {
 	var midPoint = Math.floor(list.length / 2);
